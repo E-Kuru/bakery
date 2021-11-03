@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Buttons from "./compnents/Buttons"
+import Add from './compnents/Add'
+import List from './compnents/List'
+import Pay from './compnents/Pay'
+
+class App extends React.Component {
+  constructor(){
+    super()
+
+    this.state = {
+
+      activeTab: "add",
+    	items: [],
+    }
+
+    this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.addItems = this.addItems.bind(this)
+  }
+  
+  handleButtonClick (e){
+    // console.log(e);
+    this.setState({
+      activeTab : e
+    })
+  }
+
+  addItems (n,p){
+    const newArray = {
+      name : n,
+      price : p
+    }
+    this.setState({
+      items : [newArray,...this.state.items]
+    })
+  }
+
+  render() {
+    console.log(this.state.items);
+    return (
+      <div>
+        <div className="container">
+        <h1>Bakery</h1>
+          <div className="row col-6 my-4">
+
+            <Buttons name='Add' 
+            handleClick = {this.handleButtonClick}
+            isSelected = {this.state.activeTab === 'Add'}
+            />
+
+            <Buttons name='List' 
+            handleClick ={this.handleButtonClick}
+            isSelected = {this.state.activeTab === 'List'}
+            />
+
+            <Buttons name='Pay' 
+            handleClick ={this.handleButtonClick}
+            isSelected = {this.state.activeTab === 'Pay'}
+            />
+
+            {this.state.activeTab === 'Add' && <Add addItems={this.addItems}/>}
+            {this.state.activeTab === 'List' && <List items={this.state.items}/>}
+            {this.state.activeTab === 'Pay' && <Pay/>}
+
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
