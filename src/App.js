@@ -17,6 +17,7 @@ class App extends React.Component {
 
     this.handleButtonClick = this.handleButtonClick.bind(this)
     this.addItems = this.addItems.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
   }
   
   handleButtonClick (e){
@@ -36,8 +37,13 @@ class App extends React.Component {
     })
   }
 
+  deleteItem (index) {
+    const newItems = this.state.items.filter((e, i) => i !== index)
+
+    this.setState({ items: newItems })
+  }
+
   render() {
-    console.log(this.state.items);
     return (
       <div>
         <div className="container">
@@ -60,7 +66,7 @@ class App extends React.Component {
             />
 
             {this.state.activeTab === 'Add' && <Add addItems={this.addItems}/>}
-            {this.state.activeTab === 'List' && <List items={this.state.items}/>}
+            {this.state.activeTab === 'List' && <List items={this.state.items} deleteItem={this.deleteItem}/>}
             {this.state.activeTab === 'Pay' && <Pay/>}
 
           </div>

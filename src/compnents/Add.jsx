@@ -13,6 +13,7 @@ class Add extends Component {
         }
         this.handleNameChange = this.handleNameChange.bind(this)
         this.handlePriceChange = this.handlePriceChange.bind(this)
+        this.reset = this.reset.bind(this)
     }
 
     handleNameChange (e) {
@@ -29,32 +30,45 @@ class Add extends Component {
         })
     }
 
+    reset (e){
+        e.preventDefault();
+
+        this.setState({
+            name: "",
+            price : 1
+        })
+    }
+
     render() {
+        
         const {addItems} = this.props
         const {name,price} = this.state
+
         return (
             <div className='my-3'>
                 <div className="row mb-3">
                     <div className="col-9 ">
                         <input type="text" className="form-control" onChange={this.handleNameChange}/>
                     </div>
+                    <form action="submit"className='col-2' onSubmit={this.reset}>
                     <button 
-                    value={this.state.name} 
-                    type="button" 
-                    className='btn btn-primary col-2' 
-                    disabled={this.state.name ? false : true}
+                    value={name} 
+                    type="submit" 
+                    className='btn btn-primary' 
+                    disabled={name ? false : true}
                     onClick={() => addItems(name,price)}
                     >Add
                     </button>
+                    </form>
                 </div>
                 <div className="d-flex justify-content-between">
-                    <input value={this.state.price} 
+                    <input value={price} 
                     type="range" 
                     className='col-9' 
                     max='10' 
                     min='1' 
                     onChange={this.handlePriceChange}/>
-                    <span className='col-2 d-flex justify-content-center'>{this.state.price} €</span>
+                    <span className='col-2 d-flex justify-content-center'>{price} €</span>
                 </div>
             </div>
         );

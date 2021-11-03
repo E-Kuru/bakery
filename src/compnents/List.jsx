@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class List extends Component {
 
     render() {
-        const {items} = this.props
+        const {items, deleteItem} = this.props
         return (
             <div className='my-3'>
                 {items.map( (e, i) => (
@@ -11,7 +11,7 @@ class List extends Component {
                     <span>{e.name}</span>
 
                     <span className='d-flex align-items-center rounded-pill bg-primary px-3 py-1' 
-                    style={{ color : 'white', fontSize : '12px'}}
+                    style={{ color : 'white', fontSize : '13px'}}
                     >{e.price}€
                     </span>
 
@@ -19,6 +19,7 @@ class List extends Component {
                     type="button" 
                     className='btn btn-danger d-flex align-items-center'
                     style={{height : '30px', fontSize : '15px'}} 
+                    onClick={() => deleteItem(i)}
                     >Supprimer
                     </button>
                  </div>
