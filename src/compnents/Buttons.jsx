@@ -7,7 +7,13 @@ class Buttons extends Component {
         const {name, handleClick,isSelected} = this.props
         return (
             <div className='col-3'>
-                <button type="button" onClick={ () => handleClick(name)} className={isSelected ? 'btn btn-primary' : 'btn btn-outline-primary'}>{name}</button>
+                <button 
+                type="button" 
+                onClick={ () => handleClick(name)} 
+                className={isSelected ? 
+                'btn btn-primary' : 'btn btn-outline-primary'}
+                >{name}
+                </button>
             </div>
         );
     }
