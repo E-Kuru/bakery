@@ -31,6 +31,7 @@ class Add extends Component {
     }
 
     reset (e){
+
         e.preventDefault();
 
         this.setState({
@@ -44,21 +45,34 @@ class Add extends Component {
         const {addItems} = this.props
         const {name,price} = this.state
 
+        console.log(name);
+        console.log(price);
+
         return (
             <div className='my-3'>
+
                 <div className="row mb-3">
+
                     <div className="col-9 ">
-                        <input type="text" className="form-control" onChange={this.handleNameChange}/>
+
+                        <input
+                         type="text" 
+                         value={name} 
+                         className="form-control" 
+                         onChange={this.handleNameChange}
+                         />
                     </div>
+
                     <form action="submit"className='col-2' onSubmit={this.reset}>
-                    <button 
-                    value={name} 
-                    type="submit" 
-                    className='btn btn-primary' 
-                    disabled={name ? false : true}
-                    onClick={() => addItems(name,price)}
-                    >Add
-                    </button>
+
+                        <button 
+                        type="submit" 
+                        className='btn btn-primary' 
+                        disabled={name ? false : true}
+                        onClick={() => addItems(name,price)}
+                        >Add
+                        </button>
+                        
                     </form>
                 </div>
                 <div className="d-flex justify-content-between">
